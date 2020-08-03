@@ -13,6 +13,6 @@
         "generate100": "spritesheet-js sprites/**/*.png --trim --scale 100% -f json --name atlas0_100 --fullpath -p ../res_built/atlas"
     },
     "dependencies": {
-        "spritesheet-js": "^1.2.6"
+        "spritesheet-js": "github:marcel0ll/spritesheet.js"
     }
 }
