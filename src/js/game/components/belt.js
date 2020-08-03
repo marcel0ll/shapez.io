@@ -4,6 +4,7 @@ import { BeltPath } from "../belt_path";
 import { Component } from "../component";
 import { Entity } from "../entity";
 import { enumLayer } from "../root";
+import { defaultBuildingVariant } from "../meta_building";
 
 export const curvedBeltLength = /* Math.PI / 4 */ 0.78;
 
@@ -16,22 +17,25 @@ export class BeltComponent extends Component {
         // The followUpCache field is not serialized.
         return {
             direction: types.string,
+            variant: types.string,
         };
     }
 
     duplicateWithoutContents() {
-        return new BeltComponent({ direction: this.direction });
+        return new BeltComponent({ direction: this.direction, variant: this.variant });
     }
 
     /**
      *
      * @param {object} param0
      * @param {enumDirection=} param0.direction The direction of the belt
+     * @param {variant=} param0.variant The variant of the belt
      */
-    constructor({ direction = enumDirection.top }) {
+    constructor({ direction = enumDirection.top, variant = defaultBuildingVariant }) {
         super();
 
         this.direction = direction;
+        this.variant = variant;
 
         /** @type {Entity} */
         this.followUpCache = null;

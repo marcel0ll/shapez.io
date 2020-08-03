@@ -88,8 +88,9 @@ export class MetaBeltBaseBuilding extends MetaBuilding {
      * @param {Entity} entity
      * @param {number} rotationVariant
      */
-    updateVariants(entity, rotationVariant) {
+    updateVariants(entity, rotationVariant, variant) {
         entity.components.Belt.direction = arrayBeltVariantToRotation[rotationVariant];
+        entity.components.Belt.variant = variant;
         entity.components.ItemEjector.slots[0].direction = arrayBeltVariantToRotation[rotationVariant];
     }
 

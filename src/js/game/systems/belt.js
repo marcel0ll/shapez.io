@@ -7,6 +7,7 @@ import { AtlasSprite } from "../../core/sprites";
 import { fastArrayDeleteValue } from "../../core/utils";
 import { enumDirection, enumDirectionToVector, enumInvertedDirections, Vector } from "../../core/vector";
 import { BeltPath } from "../belt_path";
+import { enumBeltVariants } from "../buildings/belt";
 import { arrayBeltVariantToRotation, MetaBeltBaseBuilding } from "../buildings/belt_base";
 import { BeltComponent } from "../components/belt";
 import { Entity } from "../entity";
@@ -35,6 +36,30 @@ export class BeltSystem extends GameSystemWithFilter {
             [enumDirection.left]: Loader.getSprite("sprites/belt/left_0.png"),
             [enumDirection.right]: Loader.getSprite("sprites/belt/right_0.png"),
         };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltRedSprites = {
+            [enumDirection.top]: Loader.getSprite("sprites/belt/forward_red_0.png"),
+            [enumDirection.left]: Loader.getSprite("sprites/belt/left_red_0.png"),
+            [enumDirection.right]: Loader.getSprite("sprites/belt/right_red_0.png"),
+        };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltGreenSprites = {
+            [enumDirection.top]: Loader.getSprite("sprites/belt/forward_green_0.png"),
+            [enumDirection.left]: Loader.getSprite("sprites/belt/left_green_0.png"),
+            [enumDirection.right]: Loader.getSprite("sprites/belt/right_green_0.png"),
+        };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltBlueSprites = {
+            [enumDirection.top]: Loader.getSprite("sprites/belt/forward_blue_0.png"),
+            [enumDirection.left]: Loader.getSprite("sprites/belt/left_blue_0.png"),
+            [enumDirection.right]: Loader.getSprite("sprites/belt/right_blue_0.png"),
+        };
 
         /**
          * @type {Object.<enumDirection, Array<AtlasSprite>>}
@@ -53,6 +78,30 @@ export class BeltSystem extends GameSystemWithFilter {
             [enumDirection.left]: [],
             [enumDirection.right]: [],
         };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltRedAnimations = {
+            [enumDirection.top]: [],
+            [enumDirection.left]: [],
+            [enumDirection.right]: [],
+        };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltGreenAnimations = {
+            [enumDirection.top]: [],
+            [enumDirection.left]: [],
+            [enumDirection.right]: [],
+        };
+        /**
+         * @type {Object.<enumDirection, Array<AtlasSprite>>}
+         */
+        this.beltBlueAnimations = {
+            [enumDirection.top]: [],
+            [enumDirection.left]: [],
+            [enumDirection.right]: [],
+        };
 
         for (let i = 0; i < BELT_ANIM_COUNT; ++i) {
             this.beltAnimations[enumDirection.top].push(
@@ -61,6 +110,36 @@ export class BeltSystem extends GameSystemWithFilter {
             this.beltAnimations[enumDirection.left].push(Loader.getSprite("sprites/belt/left_" + i + ".png"));
             this.beltAnimations[enumDirection.right].push(
                 Loader.getSprite("sprites/belt/right_" + i + ".png")
+            );
+
+            this.beltRedAnimations[enumDirection.top].push(
+                Loader.getSprite("sprites/belt/forward_red_" + i + ".png")
+            );
+            this.beltRedAnimations[enumDirection.left].push(
+                Loader.getSprite("sprites/belt/left_red_" + i + ".png")
+            );
+            this.beltRedAnimations[enumDirection.right].push(
+                Loader.getSprite("sprites/belt/right_red_" + i + ".png")
+            );
+
+            this.beltGreenAnimations[enumDirection.top].push(
+                Loader.getSprite("sprites/belt/forward_green_" + i + ".png")
+            );
+            this.beltGreenAnimations[enumDirection.left].push(
+                Loader.getSprite("sprites/belt/left_green_" + i + ".png")
+            );
+            this.beltGreenAnimations[enumDirection.right].push(
+                Loader.getSprite("sprites/belt/right_green_" + i + ".png")
+            );
+
+            this.beltBlueAnimations[enumDirection.top].push(
+                Loader.getSprite("sprites/belt/forward_blue_" + i + ".png")
+            );
+            this.beltBlueAnimations[enumDirection.left].push(
+                Loader.getSprite("sprites/belt/left_blue_" + i + ".png")
+            );
+            this.beltBlueAnimations[enumDirection.right].push(
+                Loader.getSprite("sprites/belt/right_blue_" + i + ".png")
             );
         }
 
@@ -525,7 +604,23 @@ export class BeltSystem extends GameSystemWithFilter {
 
                 if (entity && entity.components.Belt) {
                     const direction = entity.components.Belt.direction;
-                    const sprite = this.beltAnimations[direction][animationIndex % BELT_ANIM_COUNT];
+                    const variant = entity.components.Belt.variant;
+
+                    let sprite;
+                    switch (variant) {
+                        case defaultBuildingVariant:
+                            sprite = this.beltAnimations[direction][animationIndex % BELT_ANIM_COUNT];
+                            break;
+                        case enumBeltVariants.red:
+                            sprite = this.beltRedAnimations[direction][animationIndex % BELT_ANIM_COUNT];
+                            break;
+                        case enumBeltVariants.green:
+                            sprite = this.beltGreenAnimations[direction][animationIndex % BELT_ANIM_COUNT];
+                            break;
+                        case enumBeltVariants.blue:
+                            sprite = this.beltBlueAnimations[direction][animationIndex % BELT_ANIM_COUNT];
+                            break;
+                    }
 
                     entity.components.StaticMapEntity.drawSpriteOnFullEntityBounds(
                         parameters,

@@ -1,7 +1,7 @@
 import { gMetaBuildingRegistry } from "../core/global_registries";
 import { createLogger } from "../core/logging";
 import { MetaAdvancedProcessorBuilding } from "./buildings/advanced_processor";
-import { MetaBeltBuilding } from "./buildings/belt";
+import { MetaBeltBuilding, enumBeltVariants } from "./buildings/belt";
 import { MetaBeltBaseBuilding } from "./buildings/belt_base";
 import { enumCutterVariants, MetaCutterBuilding } from "./buildings/cutter";
 import { MetaEnergyGenerator } from "./buildings/energy_generator";
@@ -42,6 +42,18 @@ export function initMetaBuildingRegistry() {
     registerBuildingVariant(1, MetaBeltBaseBuilding, defaultBuildingVariant, 0);
     registerBuildingVariant(2, MetaBeltBaseBuilding, defaultBuildingVariant, 1);
     registerBuildingVariant(3, MetaBeltBaseBuilding, defaultBuildingVariant, 2);
+
+    registerBuildingVariant(34, MetaBeltBaseBuilding, enumBeltVariants.red, 0);
+    registerBuildingVariant(35, MetaBeltBaseBuilding, enumBeltVariants.red, 1);
+    registerBuildingVariant(36, MetaBeltBaseBuilding, enumBeltVariants.red, 2);
+
+    registerBuildingVariant(37, MetaBeltBaseBuilding, enumBeltVariants.green, 0);
+    registerBuildingVariant(38, MetaBeltBaseBuilding, enumBeltVariants.green, 1);
+    registerBuildingVariant(39, MetaBeltBaseBuilding, enumBeltVariants.green, 2);
+
+    registerBuildingVariant(40, MetaBeltBaseBuilding, enumBeltVariants.blue, 0);
+    registerBuildingVariant(41, MetaBeltBaseBuilding, enumBeltVariants.blue, 1);
+    registerBuildingVariant(42, MetaBeltBaseBuilding, enumBeltVariants.blue, 2);
 
     // Splitter
     registerBuildingVariant(4, MetaSplitterBuilding);
