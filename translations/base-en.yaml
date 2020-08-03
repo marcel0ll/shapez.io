@@ -447,6 +447,18 @@ buildings:
             name: &belt Conveyor Belt
             description: Transports items, hold and drag to place multiple.
 
+        red:
+            name: &belt Red Conveyor Belt
+            description: Transports items, hold and drag to place multiple.
+
+        green:
+            name: &belt Green Conveyor Belt
+            description: Transports items, hold and drag to place multiple.
+
+        blue:
+            name: &belt Blue Conveyor Belt
+            description: Transports items, hold and drag to place multiple.
+
     wire:
         default:
             name: &wire Energy Wire
