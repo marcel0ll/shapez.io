@@ -1,0 +1,18 @@
+{
+    "name": "spritesheet",
+    "version": "1.0.0",
+    "main": "index.js",
+    "private": "true",
+    "devDependencies": {},
+    "scripts": {
+        "generate": "npm run generate10 && npm run generate25 && npm run generate50 && npm run generate75 && npm run generate100",
+        "generate10": "spritesheet-js sprites/**/*.png --trim --scale 10% -f json --name atlas0_10 --fullpath -p ../res_built/atlas",
+        "generate25": "spritesheet-js sprites/**/*.png --trim --scale 25% -f json --name atlas0_25 --fullpath -p ../res_built/atlas",
+        "generate50": "spritesheet-js sprites/**/*.png --trim --scale 50% -f json --name atlas0_50 --fullpath -p ../res_built/atlas",
+        "generate75": "spritesheet-js sprites/**/*.png --trim --scale 75% -f json --name atlas0_75 --fullpath -p ../res_built/atlas",
+        "generate100": "spritesheet-js sprites/**/*.png --trim --scale 100% -f json --name atlas0_100 --fullpath -p ../res_built/atlas"
+    },
+    "dependencies": {
+        "spritesheet-js": "^1.2.6"
+    }
+}
