@@ -255,7 +255,7 @@ export class BeltSystem extends GameSystemWithFilter {
 
                         // Change stuff
                         targetStaticComp.rotation = rotation;
-                        metaBelt.updateVariants(targetEntity, rotationVariant, defaultBuildingVariant);
+                        metaBelt.updateVariants(targetEntity, rotationVariant, targetBeltComp.variant);
 
                         // Now add it again
                         this.addEntityToPaths(targetEntity);
